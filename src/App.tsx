@@ -18,7 +18,7 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen flex flex-col bg-background font-poppins">
+      <div className="min-h-screen flex flex-col bg-background">
         <a href="#main-content" className="skip-link">Skip to main content</a>
         <UtilityStrip />
         <MainHeader />
