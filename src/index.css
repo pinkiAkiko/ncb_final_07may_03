@@ -1,7 +1,14 @@
-@import "tailwindcss";
+@import "tailwindcss" source(none);
+@source "../src";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+
+/*
+ * NCB institutional design system.
+ * Palette: deep navy primary, white/light grey surfaces, restrained
+ * saffron + green accents. All colors in oklch.
+ */
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -52,7 +59,6 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --font-poppins: "Poppins", sans-serif;
 }
 
 :root {
@@ -113,6 +119,22 @@
   --sidebar-ring: oklch(0.72 0.16 60);
 }
 
+.high-contrast {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.05 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.05 0 0);
+  --primary: oklch(0.1 0.02 260);
+  --primary-foreground: oklch(1 0 0);
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: oklch(0.2 0 0);
+  --border: oklch(0.3 0 0);
+  --navy: oklch(0.1 0.02 260);
+  --navy-deep: oklch(0.05 0 0);
+  --strip: oklch(0.05 0 0);
+  --saffron: oklch(0.65 0.18 60);
+}
+
 @layer base {
   html {
     font-size: calc(100% * var(--font-scale, 1));
@@ -125,7 +147,9 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: var(--font-poppins);
+    font-family: "Poppins", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial, sans-serif;
+    font-feature-settings: "ss01", "cv01";
     -webkit-font-smoothing: antialiased;
   }
 
@@ -133,6 +157,32 @@
     outline: 2px solid var(--color-saffron);
     outline-offset: 2px;
     border-radius: 2px;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 100;
+    background: var(--color-navy);
+    color: var(--color-navy-foreground);
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+  }
+
+  .skip-link:focus {
+    left: 0.5rem;
+    top: 0.5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-track {
+      animation: none !important;
+    }
+    .reveal {
+      opacity: 1 !important;
+      transition: none !important;
+    }
   }
 }
 
@@ -153,6 +203,24 @@
   animation: ticker 45s linear infinite;
 }
 
+/* NCB section utilities */
+.bg-saffron-tint { background-color: oklch(0.97 0.025 75); }
+.bg-soft-gray { background-color: oklch(0.96 0.005 250); }
+
+.hairline-grid > * {
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+.hairline-grid { border-top: 1px solid var(--color-border); border-left: 1px solid var(--color-border); }
+
+.section-rule {
+  border-left: 4px solid var(--color-saffron);
+  padding-left: 1rem;
+}
+/*
+ * Custom Scrollbar - Thin & Light
+ * Making the global scrollbar subtle and premium.
+ */
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
@@ -171,6 +239,7 @@
   background: oklch(0.7 0.02 255 / 0.6);
 }
 
+/* Firefox support */
 * {
   scrollbar-width: thin;
   scrollbar-color: oklch(0.85 0.01 255 / 0.4) transparent;
