@@ -23,10 +23,20 @@ function AppInner() {
   const [loading, setLoading] = useState(true);
   const { showModal } = useLanguage();
 
+  if (loading) {
+    return <LogoLoader onFadeOut={() => setLoading(false)} />;
+  }
+
+  if (showModal) {
+    return (
+      <div className="min-h-screen bg-background">
+        <LanguageModal />
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      {loading && <LogoLoader onFadeOut={() => setLoading(false)} />}
-      {!loading && showModal && <LanguageModal />}
+    <div className="min-h-screen flex flex-col bg-background animate-in fade-in duration-700">
       <a href="#main-content" className="skip-link">Skip to main content</a>
       <UtilityStrip />
       <MainHeader />
