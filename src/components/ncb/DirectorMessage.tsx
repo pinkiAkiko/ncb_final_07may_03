@@ -21,11 +21,9 @@ export function DirectorMessage() {
         </figure>
 
         <div className="md:pt-2 border-l-4 border-saffron pl-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-saffron">
-            From the Director General
-          </p>
+
           <h2 id="dg-title" className="mt-2 text-3xl md:text-4xl font-bold text-navy leading-tight">
-            Director&apos;s Message
+            From the Desk of Director General
           </h2>
           <span className="block mt-4 text-7xl leading-none text-saffron font-serif" aria-hidden>“</span>
           <blockquote className="-mt-4 text-base md:text-lg text-foreground/80 leading-relaxed italic">

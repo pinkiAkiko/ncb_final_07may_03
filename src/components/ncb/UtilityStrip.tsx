@@ -1,5 +1,7 @@
-import { User, Eye, AArrowDown, AArrowUp, RotateCcw, Phone } from "lucide-react";
+import { useState } from "react";
+import { User, Eye, AArrowDown, AArrowUp, RotateCcw, Phone, Globe } from "lucide-react";
 import { useAccessibility } from "@/hooks/use-accessibility";
+import { useLanguage } from "@/lib/LanguageContext";
 
 const leftLinks = [
   "Government of India",
@@ -11,6 +13,7 @@ const leftLinks = [
 
 export function UtilityStrip() {
   const a11y = useAccessibility();
+  const { selectedLang, openModal, LANGUAGES } = useLanguage();
 
   return (
     <div className="bg-strip text-strip-foreground text-xs">
@@ -35,9 +38,14 @@ export function UtilityStrip() {
           </a>
           <span className="opacity-30" aria-hidden>|</span>
           <div role="group" aria-label="Language" className="flex items-center gap-1">
-            <button className="hover:underline" aria-pressed="true">EN</button>
-            <span className="opacity-30">/</span>
-            <button className="hover:underline" lang="hi">हिन्दी</button>
+            <button 
+              onClick={openModal}
+              className="hover:underline flex items-center gap-1 opacity-90 hover:opacity-100 font-medium" 
+              aria-label="Change language"
+            >
+              <Globe className="size-3" />
+              {LANGUAGES.find(l => l.code === selectedLang)?.native || "English"}
+            </button>
           </div>
           <span className="opacity-30" aria-hidden>|</span>
           <div role="group" aria-label="Accessibility" className="flex items-center gap-1">

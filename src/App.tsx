@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { UtilityStrip } from "@/components/ncb/UtilityStrip";
 import { MainHeader } from "@/components/ncb/MainHeader";
@@ -12,29 +13,45 @@ import { ImportantSitesAndSubscribe } from "@/components/ncb/ImportantSitesAndSu
 import { SiteFooter } from "@/components/ncb/SiteFooter";
 import { Reveal } from "@/components/ncb/Reveal";
 import { Toaster } from "sonner";
+import { LogoLoader } from "@/components/ncb/LogoLoader";
+import { LanguageProvider, useLanguage } from "@/lib/LanguageContext";
+import { LanguageModal } from "@/components/ncb/LanguageModal";
 
 const queryClient = new QueryClient();
+
+function AppInner() {
+  const [loading, setLoading] = useState(true);
+  const { showModal } = useLanguage();
+
+  return (
+    <div className="min-h-screen flex flex-col bg-background">
+      {loading && <LogoLoader onFadeOut={() => setLoading(false)} />}
+      {!loading && showModal && <LanguageModal />}
+      <a href="#main-content" className="skip-link">Skip to main content</a>
+      <UtilityStrip />
+      <MainHeader />
+      <main id="main-content" className="flex-1">
+        <Hero />
+        <Reveal><AboutAndMVM /></Reveal>
+        <Reveal><DirectorMessage /></Reveal>
+        <Reveal><UpdatesAndEvents /></Reveal>
+        <Reveal><CitizenServices /></Reveal>
+        <Reveal><EnforcementAndWanted /></Reveal>
+        <Reveal><MediaAndSocial /></Reveal>
+        <Reveal><ImportantSitesAndSubscribe /></Reveal>
+      </main>
+      <SiteFooter />
+      <Toaster position="top-right" />
+    </div>
+  );
+}
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen flex flex-col bg-background">
-        <a href="#main-content" className="skip-link">Skip to main content</a>
-        <UtilityStrip />
-        <MainHeader />
-        <main id="main-content" className="flex-1">
-          <Hero />
-          <Reveal><AboutAndMVM /></Reveal>
-          <Reveal><DirectorMessage /></Reveal>
-          <Reveal><UpdatesAndEvents /></Reveal>
-          <Reveal><CitizenServices /></Reveal>
-          <Reveal><EnforcementAndWanted /></Reveal>
-          <Reveal><MediaAndSocial /></Reveal>
-          <Reveal><ImportantSitesAndSubscribe /></Reveal>
-        </main>
-        <SiteFooter />
-        <Toaster position="top-right" />
-      </div>
+      <LanguageProvider>
+        <AppInner />
+      </LanguageProvider>
     </QueryClientProvider>
   );
 }
