@@ -1,10 +1,17 @@
 import { useState, useEffect } from "react";
 import { ShieldAlert, Phone, ArrowRight, Megaphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import banner1 from "@/assets/slider/Banner_001.png";
-import banner2 from "@/assets/slider/Banner_002.png";
-import banner3 from "@/assets/slider/Banner_003.png";
-import banner4 from "@/assets/slider/Banner_004.png";
+import banner1 from "@/assets/slider/banner_001.jpg";
+import banner2 from "@/assets/slider/banner_002.jpg";
+import banner3 from "@/assets/slider/banner_003.jpg";
+import banner4 from "@/assets/slider/banner_004.jpg";
+import banner5 from "@/assets/slider/banner_005.jpg";
+import banner6 from "@/assets/slider/banner_006.jpg";
+import banner7 from "@/assets/slider/banner_007.jpg";
+import banner8 from "@/assets/slider/banner_008.jpg";
+import banner9 from "@/assets/slider/banner_009.jpg";
+import banner10 from "@/assets/slider/banner_010.jpg";
+import banner11 from "@/assets/slider/banner_011.jpg";
 
 const updates = [
   "Sample Advisory: Report drug-related information through MANAS Helpline 1933",
@@ -37,6 +44,48 @@ const slides = [
     title: "Awareness & Prevention",
     subtitle: "Say Yes to Life, No to Drugs",
     desc: "Committed to creating a drug-free society through nationwide community outreach, educational programs, and targeted youth engagement initiatives."
+  },
+  {
+    image: banner5,
+    title: "Securing the Future",
+    subtitle: "Protecting the Youth of India",
+    desc: "Dedicated to safeguarding the next generation from the perils of substance abuse through proactive measures and educational excellence."
+  },
+  {
+    image: banner6,
+    title: "National Coordination",
+    subtitle: "Strengthening Inter-agency Bonds",
+    desc: "Coordinating with state and central agencies to create a unified front against narcotics and organized crime across the nation."
+  },
+  {
+    image: banner7,
+    title: "Intelligence Excellence",
+    subtitle: "Data-Driven Enforcement",
+    desc: "Leveraging cutting-edge technology and intelligence networks to stay ahead of trafficking trends and secure our borders."
+  },
+  {
+    image: banner8,
+    title: "Global Cooperation",
+    subtitle: "Partnering for a Drug-Free World",
+    desc: "Collaborating with international partners and organizations to combat transnational drug trafficking and money laundering."
+  },
+  {
+    image: banner9,
+    title: "Zero Tolerance Policy",
+    subtitle: "Upholding the Law with Integrity",
+    desc: "Maintaining a steadfast commitment to enforcement of the NDPS Act and ensuring justice is served against illicit drug trade."
+  },
+  {
+    image: banner10,
+    title: "Community Engagement",
+    subtitle: "Building Resilient Societies",
+    desc: "Empowering citizens and communities to take a stand against drugs and support a healthier, safer environment for all."
+  },
+  {
+    image: banner11,
+    title: "National Security",
+    subtitle: "Safeguarding Sovereign Interests",
+    desc: "A critical pillar of national security, ensuring that drug trafficking does not undermine the stability and progress of the nation."
   }
 ];
 
@@ -55,98 +104,42 @@ export function Hero() {
       aria-labelledby="hero-title"
       className="relative bg-navy-deep text-navy-foreground overflow-hidden"
     >
-      {/* Invisible spacer image to force the container to exactly match the banner's intrinsic aspect ratio */}
-      <img 
-        src={slides[0].image} 
-        alt="" 
-        className="w-full h-auto min-h-[500px] lg:min-h-0 object-cover invisible" 
-        aria-hidden 
-      />
+      {/* Image container that maintains aspect ratio without cutting, capped at 450px height */}
+      <div className="relative w-full overflow-hidden max-h-[450px]">
+        {/* Invisible spacer image to set the base height */}
+        <img
+          src={slides[0].image}
+          alt=""
+          className="w-full h-auto opacity-0 pointer-events-none"
+          aria-hidden
+        />
 
-      {slides.map((slide, index) => (
-        <div
-          key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
-          }`}
-        >
+        {slides.map((slide, index) => (
           <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${slide.image})` }}
-            aria-hidden
-          />
-          {/* Gradient overlay to ensure text readability on the left */}
-          <div
-            className="absolute inset-0 bg-gradient-to-r from-navy-deep/95 via-navy-deep/80 to-transparent"
-            aria-hidden
-          />
-        </div>
-      ))}
-
-      <div className="absolute inset-0 z-20 flex items-center">
-        <div className="mx-auto w-full max-w-7xl px-4">
-          <div className="max-w-2xl">
-            {/* We keep the text static and fade the content to avoid layout jumps */}
-            <div className="relative">
-              {slides.map((slide, index) => (
-                <div
-                  key={index}
-                  className={`transition-all duration-700 ease-in-out absolute inset-0 flex flex-col justify-center ${
-                    index === currentSlide ? "opacity-100 translate-y-0 relative z-10" : "opacity-0 translate-y-4 hidden z-0"
-                  }`}
-                >
-                  <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-saffron mb-4">
-                    <span className="h-px w-8 bg-saffron" /> Official Government Website
-                  </p>
-                  <h1 id="hero-title" className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.1] tracking-tight">
-                    {slide.title}
-                  </h1>
-                  <p className="mt-3 text-sm sm:text-base md:text-lg text-navy-foreground/80 font-medium">
-                    {slide.subtitle}
-                  </p>
-                  <p className="mt-4 sm:mt-5 text-sm md:text-base text-navy-foreground/85 max-w-xl leading-relaxed">
-                    {slide.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-          <div className="mt-10 flex flex-wrap gap-3">
-            <Button className="bg-saffron text-saffron-foreground hover:bg-saffron/90 font-semibold rounded-none h-11 px-6 transition-all duration-300">
-              <ShieldAlert className="size-4" /> Submit a Tip
-            </Button>
-            <Button
-              variant="outline"
-              className="border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white rounded-none h-11 px-6 transition-colors duration-300"
-              asChild
-            >
-              <a href="tel:1933">
-                <Phone className="size-4" /> Call MANAS 1933
-              </a>
-            </Button>
-            <Button
-              variant="ghost"
-              className="text-white hover:bg-white/10 hover:text-white rounded-none h-11 px-4 transition-colors duration-300 group"
-            >
-              Learn About NCB <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </div>
-
-          <div className="mt-12 flex items-center gap-2">
-            {slides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentSlide(index)}
-                className={`h-1.5 transition-all duration-500 rounded-full ${
-                  index === currentSlide ? "w-8 bg-saffron" : "w-2 bg-white/30 hover:bg-white/50"
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
+              }`}
+          >
+            {/* Blurred background layer for side spaces */}
+            <div
+              className="absolute inset-0 bg-cover bg-center blur-2xl opacity-40 scale-110"
+              style={{ backgroundImage: `url(${slide.image})` }}
+              aria-hidden
+            />
+            {/* Foreground image - no cut */}
+            <div className="relative h-full w-full flex items-center justify-center">
+              <img
+                src={slide.image}
+                alt=""
+                className="max-w-full max-h-full w-auto h-auto object-contain relative z-10"
               />
-            ))}
+            </div>
+            {/* Gradient overlay removed as per request */}
           </div>
-        </div>
+        ))}
       </div>
-    </div>
+
+      {/* Overlay text and actions removed as per request */}
 
       <div className="relative z-20 bg-strip border-t border-white/10">
         <div className="mx-auto max-w-7xl px-4 py-3 flex items-center gap-3">
