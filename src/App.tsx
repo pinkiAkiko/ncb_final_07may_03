@@ -24,23 +24,29 @@ function AppInner() {
   const { showModal } = useLanguage();
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className={`min-h-screen flex flex-col transition-colors duration-500 ${(loading || showModal) ? "bg-[#030810]" : "bg-background"}`}>
       {loading && <LogoLoader onFadeOut={() => setLoading(false)} />}
-      {!loading && showModal && <LanguageModal />}
-      <a href="#main-content" className="skip-link">Skip to main content</a>
-      <UtilityStrip />
-      <MainHeader />
-      <main id="main-content" className="flex-1">
-        <Hero />
-        <Reveal><AboutAndMVM /></Reveal>
-        <Reveal><DirectorMessage /></Reveal>
-        <Reveal><UpdatesAndEvents /></Reveal>
-        <Reveal><CitizenServices /></Reveal>
-        <Reveal><EnforcementAndWanted /></Reveal>
-        <Reveal><MediaAndSocial /></Reveal>
-        <Reveal><ImportantSitesAndSubscribe /></Reveal>
-      </main>
-      <SiteFooter />
+      {!loading && (
+        <>
+          {showModal && <LanguageModal />}
+          <div className={`flex flex-col min-h-screen transition-all duration-700 ${showModal ? "blur-md brightness-50 pointer-events-none" : "blur-0 brightness-100"}`}>
+            <a href="#main-content" className="skip-link">Skip to main content</a>
+            <UtilityStrip />
+            <MainHeader />
+            <main id="main-content" className="flex-1">
+              <Hero />
+              <Reveal><AboutAndMVM /></Reveal>
+              <Reveal><DirectorMessage /></Reveal>
+              <Reveal><UpdatesAndEvents /></Reveal>
+              <Reveal><CitizenServices /></Reveal>
+              <Reveal><EnforcementAndWanted /></Reveal>
+              <Reveal><MediaAndSocial /></Reveal>
+              <Reveal><ImportantSitesAndSubscribe /></Reveal>
+            </main>
+            <SiteFooter />
+          </div>
+        </>
+      )}
       <Toaster position="top-right" />
     </div>
   );

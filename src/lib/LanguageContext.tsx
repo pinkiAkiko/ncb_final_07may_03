@@ -33,7 +33,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     const [selectedLang, setSelectedLang] = useState<string | null>(
         () => localStorage.getItem(STORAGE_KEY)
     );
-    const [showModal, setShowModal] = useState(!localStorage.getItem(STORAGE_KEY));
+    const [showModal, setShowModal] = useState(true);
 
     const selectLanguage = useCallback((code: string) => {
         localStorage.setItem(STORAGE_KEY, code);
