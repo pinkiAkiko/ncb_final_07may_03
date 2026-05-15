@@ -47,7 +47,7 @@ const navigationData = [
       { title: "Acts & Rules", href: "#" },
       { title: "Treaties", href: "#" },
       { title: "Publications", href: "#" },
-      { title: "NDPS Exclusive Court Cases", href: "#" },
+      { title: "NDPS Exclusive Courts", href: "#" },
     ],
   },
   { title: "Alert Awareness", href: "#" },
