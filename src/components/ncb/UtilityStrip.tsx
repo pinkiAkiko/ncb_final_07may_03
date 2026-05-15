@@ -38,9 +38,9 @@ export function UtilityStrip() {
           </a>
           <span className="opacity-30" aria-hidden>|</span>
           <div role="group" aria-label="Language" className="flex items-center gap-1">
-            <button 
+            <button
               onClick={openModal}
-              className="hover:underline flex items-center gap-1 opacity-90 hover:opacity-100 font-medium" 
+              className="hover:underline flex items-center gap-1 opacity-90 hover:opacity-100 font-medium"
               aria-label="Change language"
             >
               <Globe className="size-3" />
@@ -67,10 +67,6 @@ export function UtilityStrip() {
               <Eye className="size-3.5" aria-hidden />
             </button>
           </div>
-          <span className="opacity-30" aria-hidden>|</span>
-          <a href="#" className="inline-flex items-center gap-1 hover:underline">
-            <User className="size-3.5" aria-hidden /> Login
-          </a>
         </div>
       </div>
     </div>
